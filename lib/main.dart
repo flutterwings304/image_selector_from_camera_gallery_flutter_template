@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: GalleryAccess(),
+    return MaterialApp(
+      theme: ThemeData(primaryColor: Colors.green),
+      home: const GalleryAccess(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -35,12 +38,7 @@ class _GalleryAccessState extends State<GalleryAccess> {
       appBar: AppBar(
         title: const Text('Gallery and Camera Access'),
         backgroundColor: Colors.green,
-        actions: const [
-          Text(
-            "GFG",
-            textScaleFactor: 3,
-          )
-        ],
+        actions: const [],
       ),
       body: Builder(
         builder: (BuildContext context) {
@@ -49,10 +47,15 @@ class _GalleryAccessState extends State<GalleryAccess> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green)),
                   child: const Text('Select Image from Gallery and Camera'),
                   onPressed: () {
                     _showPicker(context: context);
                   },
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 SizedBox(
                   height: 200.0,
@@ -60,6 +63,14 @@ class _GalleryAccessState extends State<GalleryAccess> {
                   child: galleryFile == null
                       ? const Center(child: Text('Sorry nothing selected!!'))
                       : Center(child: Image.file(galleryFile!)),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 18.0),
+                  child: Text(
+                    "GFG",
+                    textScaleFactor: 3,
+                    style: TextStyle(color: Colors.green),
+                  ),
                 )
               ],
             ),
