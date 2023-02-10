@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -62,7 +63,10 @@ class _GalleryAccessState extends State<GalleryAccess> {
                   width: 300.0,
                   child: galleryFile == null
                       ? const Center(child: Text('Sorry nothing selected!!'))
-                      : Center(child: Image.file(galleryFile!)),
+                      : Center(
+                          child: kIsWeb
+                              ? Image.network(galleryFile!.path)
+                              : Image.file(galleryFile!)),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 18.0),
